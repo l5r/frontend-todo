@@ -1,0 +1,14 @@
+{{page-title "Todo Items"}}
+
+<div class="mx-auto mw-small">
+  <h1>To Do:</h1>
+
+  <ul class="list-group">
+    {{#each @model as |todoItem| }}
+      <TodoItem @todoItem={{todoItem}} />
+    {{/each}}
+  </ul>
+</div>
+
+<TodoItemForm @onSubmit={{this.update}} />
+

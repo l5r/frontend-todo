@@ -1,0 +1,24 @@
+<li class="list-group-item d-flex justify-content-between align-items-center list-group-item-{{ this.statusDecoration }}">
+  <div class="position-relative">
+    <Input
+      id="todo-{{@todoItem.id}}-checkbox"
+      @checked={{ this.completed }}
+      @type="checkbox"
+      class="form-check-input me-1" />
+    <label
+      for="todo-{{@todoItem.id}}-checkbox"
+      class="form-check-label stretched-link {{if this.completed "text-decoration-line-through"}}">
+      {{ @todoItem.title }}
+    </label>
+    <small>
+      {{ formatDateTime @todoItem.deadline }}
+    </small>
+  </div>
+  <div>
+    <button type="button" {{on "click" this.delete}} class="btn btn-danger btn-sm">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
+        <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5M8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5m3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0"/>
+      </svg>
+    </button>
+  </div>
+</li>

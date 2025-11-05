@@ -1,0 +1,23 @@
+{{page-title "Todo Lists"}}
+
+<div class="mx-auto mw-small">
+  <h1>To-Do Lists</h1>
+
+  <ul class="list-group">
+    {{#each @model as |todo-list| }}
+      <li class="list-group-item">
+        <LinkTo @route="todo-lists.todo-list" @model={{todo-list}}>{{todo-list.title}}</LinkTo>
+      </li>
+    {{/each}}
+  </ul>
+</div>
+
+<form {{on "submit" this.createTodoList}} class="mx-auto row g-3 align-items-end mt-3 mw-medium">
+  <div class="col-12 col-md-10">
+    <label for="new-todo-list-title">Title</label>
+    <Input id="new-todo-list-title" @value={{this.newTitle}} placeholder="My todo's" class="form-control" />
+  </div>
+  <div class="col-12 col-md-2">
+    <button type="submit" class="btn btn-primary">Add</button>
+  </div>
+</form>
