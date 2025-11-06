@@ -11,4 +11,6 @@ Router.map(function () {
   this.route('todo-lists', function () {
     this.route('todo-list', { path: '/:todo-list_id' });
   });
+  this.route('login');
+  this.route('register');
 });

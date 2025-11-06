@@ -6,15 +6,19 @@ export default class TodoItemsIndexRoute extends Route {
   @service store;
 
   model() {
-    return this.store.query('todo-item', {
-      sort: "deadline"
-    }, {
-      reload: true
-    });
+    return this.store.query(
+      'todo-item',
+      {
+        sort: 'deadline',
+      },
+      {
+        reload: true,
+      },
+    );
   }
 
   @action
-  refresh () {
+  refresh() {
     return super.refresh();
   }
 }

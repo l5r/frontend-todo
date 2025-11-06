@@ -4,5 +4,4 @@ import { action } from '@ember/object';
 
 export default class TodoListsTodoListController extends Controller {
   @service store;
-
 }

@@ -6,7 +6,7 @@ export default class TodoItemsIndexController extends Controller {
   @service store;
 
   @action
-  update(){
-    this.send("refresh")
+  update() {
+    this.send('refresh');
   }
 }

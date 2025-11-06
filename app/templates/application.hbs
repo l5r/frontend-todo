@@ -1,21 +1,27 @@
-{{page-title "Todos"}}
+{{page-title "Todo"}}
 
 <nav class="navbar navbar-expand-sm bg-body-tertiary">
   <div class="container mw-medium">
-    <a class="navbar-brand">Home</a>
+    <LinkTo @route="index" class="navbar-brand">Home</LinkTo>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-menu" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbar-menu">
+    <div class="collapse navbar-collapse me-auto" id="navbar-menu">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <LinkTo @route=todo-lists.index class="nav-link">To Do-Lists</LinkTo>
+          <LinkTo @route="todo-lists.index" class="nav-link">To Do-Lists</LinkTo>
         </li>
         <li class="nav-item">
-          <LinkTo @route=todo-items.index class="nav-link">All To Do's</LinkTo>
+          <LinkTo @route="todo-items.index" class="nav-link">All To Do's</LinkTo>
         </li>
       </ul>
     </div>
+    {{#if this.session.isAuthenticated}}
+      <MuLogout />
+    {{else}}
+      <LinkTo @route="login" class="btn btn-primary me-2">Log in</LinkTo>
+      <LinkTo @route="register" class="btn btn-secondary">Register</LinkTo>
+    {{/if}}
   </div>
 </nav>
 

@@ -24,7 +24,7 @@ export default class TodoItemFormComponent extends Component {
     const todo = this.store.createRecord('todo-item', {
       title: this.newTitle,
       deadline: tzDeadline,
-      list: todoList
+      list: todoList,
     });
     await todo.save();
 
