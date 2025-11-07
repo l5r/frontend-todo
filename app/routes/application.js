@@ -7,8 +7,4 @@ export default class ApplicationRoute extends Route {
   beforeModel() {
     return this.session.setup();
   }
-
-  model() {
-    console.log(this.session)
-  }
 }
