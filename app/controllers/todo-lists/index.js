@@ -19,4 +19,9 @@ export default class TodoListsIndexController extends Controller {
 
     this.newTitle = '';
   }
+
+  @action
+  async delete(todoList) {
+    await todoList.destroyRecord();
+  }
 }
