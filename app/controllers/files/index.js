@@ -4,7 +4,8 @@ import DataTableController from 'ember-data-table/controller';
 
 export default class FilesIndexController extends DataTableController {
   @action
-  delete(file) {
+  delete(file, event) {
+    event.stopPropagation();
     return file.destroyRecord();
   }
 }

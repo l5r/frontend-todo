@@ -13,4 +13,15 @@
   @updateFilter={{fn (mut this.filter)}}
   @updateSort={{fn (mut this.sort)}}
   @updatePage={{fn (mut this.page)}}
-  @updatePageSize={{fn (mut this.size)}} />
+  @updatePageSize={{fn (mut this.size)}}>
+  <:actions-header>
+  <th></th>
+  </:actions-header>
+  <:actions as |actions| >
+    <td>
+    <button type="button" class="btn btn-danger btn-sm" {{on 'click' (fn this.delete actions.item)}}>
+      Delete
+    </button>
+    </td>
+  </:actions>
+</Ui::Table>
