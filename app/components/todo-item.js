@@ -1,15 +1,23 @@
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { action } from '@ember/object';
+import { inject as service } from '@ember/service';
 
 export default class TodoItemComponent extends Component {
+  @service store;
+
+  get todoItem() {
+    if (this.args.todoItem == null) throw TypeError('todoItem cannot be null');
+
+    return this.args.todoItem;
+  }
+
   get completed() {
-    const todoItem = this.args.todoItem;
-    return todoItem.completedAt && inPast(todoItem.completedAt);
+    return this.todoItem.completedAt && inPast(this.todoItem.completedAt);
   }
 
   set completed(completed) {
-    const todoItem = this.args.todoItem;
+    const todoItem = this.todoItem;
     if (completed) {
       todoItem.completedAt = Temporal.Now.zonedDateTimeISO();
     } else {
@@ -19,7 +27,7 @@ export default class TodoItemComponent extends Component {
   }
 
   get status() {
-    const todoItem = this.args.todoItem;
+    const todoItem = this.todoItem;
 
     if (todoItem.completedAt && inPast(todoItem.completedAt)) {
       return 'completed';
@@ -54,7 +62,21 @@ export default class TodoItemComponent extends Component {
 
   @action
   delete() {
-    this.args.todoItem.destroyRecord();
+    this.todoItem.destroyRecord();
+  }
+
+  @action
+  async uploadFile(fileUpload) {
+    try {
+      const response = await fileUpload.upload('/files');
+      const json = await response.json();
+      const fileId = json.data.id;
+      const file = await this.store.findRecord('file', fileId);
+      this.todoItem.file = file;
+      this.todoItem.save();
+    } catch (response) {
+      console.error('File upload failed:', response);
+    }
   }
 }
 

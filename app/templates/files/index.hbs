@@ -1,0 +1,16 @@
+{{page-title "File Index"}}
+
+<Ui::Table
+  @content={{@model}}
+  @fields="name format size created"
+  @rowLink="files.file"
+  @isLoading={{this.isLoadingModel}}
+  @filter={{this.filter}}
+  @sort={{this.sort}}
+  @page={{this.page}}
+  @size={{this.size}}
+  @total={{this.total}}
+  @updateFilter={{fn (mut this.filter)}}
+  @updateSort={{fn (mut this.sort)}}
+  @updatePage={{fn (mut this.page)}}
+  @updatePageSize={{fn (mut this.size)}} />

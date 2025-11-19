@@ -1,7 +1,7 @@
 import Route from '@ember/routing/route';
 import { service } from '@ember/service';
 
-export default class TodoItemsRoute extends Route {
+export default class FilesRoute extends Route {
   @service session;
 
   beforeModel(transition) {

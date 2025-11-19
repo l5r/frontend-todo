@@ -1,0 +1,36 @@
+{{page-title "File"}}
+
+<h1>File</h1>
+
+<div class="row">
+  <dl class="col-md-6">
+    <dt>Filename:</dt>
+    <dd>{{@model.name}}</dd>
+    <dt>Format:</dt>
+    <dd>{{@model.format}}</dd>
+    <dt>Created at:</dt>
+    <dd>{{@model.created}}</dd>
+    {{#if @model.todoItem}}
+      <dt>Todo Item:</dt>
+      <dd>{{@model.todoItem.title}}</dd>
+    {{/if}}
+  </dl>
+
+  <div class="col-md-6">
+    <div class="row">
+      <a href="/files/{{@model.id}}/download" class="btn btn-primary m-1 col-auto">
+        Download
+      </a>
+      <button type="button" {{on 'click' this.delete}} class="btn btn-danger m-1 col-auto">
+        Delete
+      </button>
+    </div>
+
+    {{#if this.isImage}}
+      <details class="mt-4">
+        <summary class="h3">Preview</summary>
+        <img class="img-fluid img-thumbnail" src="/files/{{@model.id}}/download?content-disposition=inline">
+      </details>
+    {{/if}}
+  </div>
+</div>

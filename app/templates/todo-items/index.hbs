@@ -3,8 +3,13 @@
 <div class="mx-auto mw-small">
   <h1>To Do:</h1>
 
+  <form class="mx-auto input-group mb-3" {{on 'submit' this.doSearch }}>
+    <Input id="query" name="query" @value={{this.newQuery}} @type="search" class="form-control col" />
+    <button type="submit" class="btn btn-primary">Search</button>
+  </form>
+
   <ul class="list-group">
-    {{#each @model as |todoItem| }}
+    {{#each this.todoItems as |todoItem| }}
       <TodoItem @todoItem={{todoItem}} />
     {{/each}}
   </ul>

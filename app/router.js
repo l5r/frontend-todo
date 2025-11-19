@@ -13,4 +13,7 @@ Router.map(function () {
   });
   this.route('login');
   this.route('register');
+  this.route('files', function () {
+    this.route('file', { path: '/:file_id' });
+  });
 });

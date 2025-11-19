@@ -1,7 +1,9 @@
 export default class DatetimeTransform {
   deserialize(serialized) {
     try {
-      return Temporal.ZonedDateTime.from(serialized);
+      return serialized &&
+        Temporal.Instant.from(serialized)
+          .toZonedDateTimeISO(Temporal.Now.timeZoneId());
     } catch (e) {
       if (e instanceof RangeError) {
         return null;
@@ -12,7 +14,10 @@ export default class DatetimeTransform {
   }
 
   serialize(deserialized) {
-    return deserialized && deserialized.toString();
+    return deserialized && deserialized.toString({
+      calendarName: 'never',
+      timeZoneName: 'never'
+    });
   }
 
   static create() {

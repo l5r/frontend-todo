@@ -10,4 +10,10 @@ export default class TodoItemModel extends Model {
     async: true,
   })
   list;
+
+  @belongsTo('file', {
+    inverse: 'todoItem',
+    async: true,
+  })
+  file;
 }

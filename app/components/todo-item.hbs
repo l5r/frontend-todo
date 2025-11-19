@@ -1,4 +1,5 @@
 <li class="list-group-item d-flex justify-content-between align-items-center list-group-item-{{ this.statusDecoration }}">
+{{#let (file-queue name=(concat 'todo-item-' @todoItem.id '-queue') onFileAdded=this.uploadFile) as |queue|}}
   <div class="position-relative">
     <Input
       id="todo-{{@todoItem.id}}-checkbox"
@@ -14,11 +15,31 @@
       {{ formatDateTime @todoItem.deadline }}
     </small>
   </div>
-  <div>
+  <div class="btn-group" role="group">
+    {{#if @todoItem.file}}
+      <LinkTo @route='files.file' @model={{@todoItem.file}} class="btn btn-sm btn-outline-primary">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 16 16" alt={{@todoItem.file.name}}>
+          <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0"/>
+          <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8m8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7"/>
+        </svg>
+      </LinkTo>
+    {{else}}
+      <label class="btn btn-primary btn-sm">
+        {{#if queue.files.length}}
+          {{queue.progress}}%
+        {{else}}
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-earmark-arrow-up-fill" viewBox="0 0 16 16" alt="Upload File">
+            <path d="M9.293 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.707A1 1 0 0 0 13.707 4L10 .293A1 1 0 0 0 9.293 0M9.5 3.5v-2l3 3h-2a1 1 0 0 1-1-1M6.354 9.854a.5.5 0 0 1-.708-.708l2-2a.5.5 0 0 1 .708 0l2 2a.5.5 0 0 1-.708.708L8.5 8.707V12.5a.5.5 0 0 1-1 0V8.707z"/>
+          </svg>
+        {{/if}}
+        <input type="file" class="visually-hidden" {{queue.selectFile}}>
+      </label>
+    {{/if}}
     <button type="button" {{on "click" this.delete}} class="btn btn-danger btn-sm">
       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
         <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5M8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5m3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0"/>
       </svg>
     </button>
   </div>
+{{/let}}
 </li>
