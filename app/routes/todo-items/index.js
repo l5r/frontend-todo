@@ -24,7 +24,7 @@ export default class TodoItemsIndexRoute extends Route {
     } else {
       return this.store.query('todo-item', {
         filter: {
-          title: query
+          ":phrase:title,file.content": query
         }
       }, {
         reload: true
